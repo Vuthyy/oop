@@ -26,19 +26,29 @@ class Library {
   }
 
   searchBooks(query) {
+    const lowerQuery = query.toLowerCase();
     const results = this.books.filter(
       (book) =>
-        book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query) ||
-        book.genre.toLowerCase().includes(query)
+        book.title.toLowerCase().includes(lowerQuery) ||
+        book.author.toLowerCase().includes(lowerQuery) ||
+        book.genre.toLowerCase().includes(lowerQuery)
     );
-    console.log(`Books found with query "${query}":`, results);
-    return results;
+    if (results.length !== 0) {
+      console.log(`Books found with query "${query}":`, results);
+      return results;
+    } else {
+      console.log(`No books found with query "${query}".`);
+      return null;
+    }
   }
 
   displayAvailableBooks() {
     const availableBooks = this.books.filter((book) => book.available);
-    console.log("Available books:", availableBooks);
+    if (availableBooks.length !== 0) {
+      console.log("Available books:", availableBooks);
+    } else {
+      console.log("No available books.");
+    }
     return availableBooks;
   }
 
@@ -142,18 +152,25 @@ library.addBook(book1);
 library.addBook(book2);
 library.addBook(book3);
 
-const admin = new Admin("Thyy");
-const student = new Student("Hourr");
+// const admin = new Admin("Thyy");
+// const student = new Student("Hourr");
 
-admin.borrowBook(library, "Book2");
-admin.viewBorrowedBooks();
+// admin.borrowBook(library, "Book2");
+// admin.viewBorrowedBooks();
 
-student.borrowBook(library, "Book1");
-student.viewBorrowedBooks();
+// student.borrowBook(library, "Book1");
+// student.viewBorrowedBooks();
 
-library.displayAvailableBooks();
+// library.displayAvailableBooks();
 
-student.returnBook(library, "Book1");
-student.viewBorrowedBooks();
+// student.returnBook(library, "Book1");
+// student.viewBorrowedBooks();
 
-library.displayAvailableBooks();
+// library.displayAvailableBooks();
+
+// const searchresults = library.searchBooks("novels");
+// console.log(searchresults);
+
+const borrowBook = library.borrowBook("Book5");
+
+console.log(borrowBook);
